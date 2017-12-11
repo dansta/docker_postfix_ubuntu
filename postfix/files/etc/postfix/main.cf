@@ -1,0 +1,64 @@
+mail_name =  POSTFIX_BANNERNAME
+mail_owner = POSTFIX_USERNAME
+mail_version = POSTFIX_VERSION
+mail_spool_directory = POSTFIX_SPOOL_DIRECTORY
+helpful_warnings = yes
+html_directory = /dev/null
+# todo: set usual group
+setgid_group = somegroupname
+myhostname = POSTFIX_HOSTNAME
+mydomain = POSTFIX_DOMAIN
+myorigin = POSTFIX_HOSTNAME
+inet_interfaces = all
+inet_protocols = all
+smtpd_banner = POSTFIX_HOSTNAME ESMTP
+# todo: check if we can change this
+unknown_local_recipient_reject_code = 550
+alias_maps = hash:/etc/aliases
+alias_database hash:/etc/aliases
+# scale with docker instead of changing these
+local_destination_concurrency_limit = 3
+default_destination_concurrency_limit = 5
+# 2MB
+message_size_limit = 2048000
+mynetworks = 127.0.0.1/32, POSTFIX_LOCAL_ADDRESSES
+# send somewhere else? uncomment this
+# relayhost = POSTFIX_RELAY_HOST
+smtp_tls_security_level = encrypt
+smtp_tls_mandatory_ciphers = high
+# we dont need users in a docker instance
+require_home_directory = no
+# setup bounce mail
+2bounce_notice_recipient = POSTFIX_ADMINISTRATOR
+error_notice_recipient = POSTFIX_ADMINISTRATOR
+notify_classes = bounce, resource, software, 
+
+# tls conf, comment if you do not have a certificate
+smtpd_tls_cert_file = /etc/postfix/postfix.crt
+smtpd_tls_key_file = /etc/postfix/postfix.key
+smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
+smtpd_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
+smtp_tls_loglevel = 1
+smtpd_tls_loglevel = 1
+# todo: research this
+smtpd_tls_received_header = no
+# todo: research this
+smtpd_tls_auth_only = no
+
+# this is an internet server, hence we must be compatible with plain text email
+smtp_tls_security_level = may
+smtpd_tls_security_level = may
+
+smtp_tls_eecdh_grade = strong
+smtpd_tls_eecdh_grade = strong
+smtp_tls_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5
+smtpd_tls_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5
+smtp_tls_mandatory_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5
+smtpd_tls_mandatory_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5
+smtp_tls_protocols = !SSLv2, !SSLv3
+smtpd_tls_protocols = !SSLv2, !SSLv3
+smtp_tls_mandatory_protocols = !SSLv2, !SSLv3
+smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3
+
+smtp_bind_address = POSTFIX_LISTEN
+smtp_bind_address6 = POSTFIX_LISTEN6
