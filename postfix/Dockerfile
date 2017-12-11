@@ -15,7 +15,11 @@ HEALTHCHECK --interval=15s --timeout=3s CMD ncat localhost 25 || exit 1
 
 # update and install packages
 RUN apt-get update
-RUN apt-get install -y netcat rsyslog postfix spamass-milter postgrey
+RUN apt-get install -y netcat
+RUN apt-get install -y rsyslog
+RUN apt-get install -y postfix
+RUN apt-get install -y spamass-milter
+RUN apt-get install -y postgrey
 
 # add our own config file
 ADD files/etc/postfix/main.cf /etc/postfix/main.cf
