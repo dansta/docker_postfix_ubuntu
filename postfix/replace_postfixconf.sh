@@ -10,9 +10,9 @@ VALUEAWK="/usr/bin/awk -f /usr/local/bin/value.awk"
 POSTFIXENV="$(env | grep POSTFIX)"
 # for each POSTFIXvar, replace them in the file
 for i in $POSTFIXENV; do
-  CONFDATA="$(echo -e "$CONFDATA" | sed s/"$(echo $i | $KEYAWK)"/"$(echo $i | $VALUEAWK)"/g )"
+  CONFDATA="$(echo -e "$CONFDATA" | sed s/"$(echo "$i" | $KEYAWK)"/"$(echo "$i" | $VALUEAWK)"/g )"
 done
 
 #clear out all comments and write to file
-echo -e $CONFDATA | sed /^#.*$/d > "$CONF"
+echo -e "$CONFDATA" | sed /^#.*$/d > "$CONF"
 
