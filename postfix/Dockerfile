@@ -16,22 +16,24 @@ ENV POSTFIX_ADMINISTRATOR "postmaster@${POSTFIX_DOMAIN}"
 # identify the server to any client/other server
 ENV POSTFIX_BANNERNAME "dansta/docker_postfix_ubuntu"
 # postfix runs as this user
-ENV POSTFIX_USERNAME "lowprivilegeuser"
+ENV POSTFIX_USERNAME "slushie"
 # this version will be reported to clients/other servers
 ENV POSTFIX_VERSION "latest"
 # where do we store mail?
 ENV POSTFIX_SPOOL_DIRECTORY "/var/spool/postfix"
 
+# create low privilege user
+RUN adduser ${POSTFIX_USERNAME} --disabled-password --no-create-home
 
-
+# who made this version
 LABEL maintainer=dansta
 
-# check ourselves to know we are alive
-HEALTHCHECK --interval=15s --timeout=3s CMD ncat localhost 25 || exit 1
+# check ourselves to know we are alive, i need to think of something smart here.
+# telnet will not cut it
+#HEALTHCHECK --interval=15s --timeout=3s CMD telnet localhost 25 || exit 1
 
 # update and install packages
 RUN apt-get update
-RUN apt-get install -y netcat
 RUN apt-get install -y rsyslog
 RUN apt-get install -y postfix
 RUN apt-get install -y spamass-milter
@@ -54,4 +56,4 @@ RUN service rsyslog start
 
 # test nginx for build, run in foreground
 STOPSIGNAL SIGTERM
-CMD ["postfix", "-g", "daemon off;"]
+CMD ["postfix"]
