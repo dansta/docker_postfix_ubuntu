@@ -4,23 +4,23 @@ FROM ubuntu:latest
 # postfix 
 
 # set env. replace right most column with values specific to your environment
-ENV POSTFIX_LISTEN 0.0.0.0
-ENV POSTFIX_LISTEN6 ::/0
-ENV POSTFIX_HOSTNAME MAIL
-ENV POSTFIX_DOMAIN EXAMPLE.COM
+ENV POSTFIX_LISTEN "0.0.0.0"
+ENV POSTFIX_LISTEN6 "::/0"
+ENV POSTFIX_HOSTNAME "MAIL"
+ENV POSTFIX_DOMAIN "EXAMPLE.COM"
 # this is "mynetworks" in the postfix config
-ENV POSTFIX_LOCAL_ADDRESSES 10.0.0.0/24
+ENV POSTFIX_LOCAL_ADDRESSES "10.0.0.0/24"
 # we relay to here
-ENV POSTFIX_RELAY_HOST ANOTHEREMAILSERVER
-ENV POSTFIX_ADMINISTRATOR postmaster@${POSTFIX_DOMAIN}
+ENV POSTFIX_RELAY_HOST "ANOTHEREMAILSERVER"
+ENV POSTFIX_ADMINISTRATOR "postmaster@${POSTFIX_DOMAIN}"
 # identify the server to any client/other server
-ENV POSTFIX_BANNERNAME dansta/docker_postfix_ubuntu 
+ENV POSTFIX_BANNERNAME "dansta/docker_postfix_ubuntu"
 # postfix runs as this user
-ENV POSTFIX_USERNAME lowprivilegeuser
+ENV POSTFIX_USERNAME "lowprivilegeuser"
 # this version will be reported to clients/other servers
-ENV POSTFIX_VERSION latest
+ENV POSTFIX_VERSION "latest"
 # where do we store mail?
-ENV POSTFIX_SPOOL_DIRECTORY /var/spool/postfix
+ENV POSTFIX_SPOOL_DIRECTORY "/var/spool/postfix"
 
 
 
