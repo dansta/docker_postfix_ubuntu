@@ -5,7 +5,7 @@ FROM ubuntu:latest
 
 # set env. replace right most column with values specific to your environment
 ENV POSTFIX_LISTEN "0.0.0.0"
-ENV POSTFIX_LISTEN6 "::/0"
+ENV POSTFIX_LISTEN6 '::/0'
 ENV POSTFIX_HOSTNAME "MAIL"
 ENV POSTFIX_DOMAIN "EXAMPLE.COM"
 # this is "mynetworks" in the postfix config
