@@ -61,4 +61,4 @@ smtp_tls_mandatory_protocols = !SSLv2, !SSLv3
 smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3
 
 smtp_bind_address = POSTFIX_LISTEN
-#smtp_bind_address6 = POSTFIX_LISTEN6
+smtp_bind_address6 = POSTFIX_LISTEN6
