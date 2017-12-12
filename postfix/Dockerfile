@@ -4,6 +4,8 @@ FROM ubuntu:latest
 # postfix 
 
 # set env. replace right most column with values specific to your environment
+ENV POSTFIX_SMTP_PORT '25'
+ENV POSTFIX_TLS_PORT '589'
 ENV POSTFIX_LISTEN "0.0.0.0"
 ENV POSTFIX_LISTEN6 '::\/0'
 ENV POSTFIX_HOSTNAME "MAIL"
@@ -49,7 +51,7 @@ RUN chmod u+x /usr/local/bin/replace_postfixconf
 RUN /usr/local/bin/replace_postfixconf
 
 # document port usage for docker in case you are going to use it as a service
-EXPOSE "${POSTFIX_LISTEN}/tcp"
+EXPOSE "${POSTFIX_SMTP_PORT}/tcp"
 
 # remote logging made possible
 RUN service rsyslog start
