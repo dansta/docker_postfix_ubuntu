@@ -25,7 +25,7 @@ ENV POSTFIX_VERSION "latest"
 ENV POSTFIX_SPOOL_DIRECTORY "\/var\/spool\/postfix\/"
 
 # create low privilege user
-RUN adduser ${POSTFIX_USERNAME} --disabled-password --no-create-home 
+RUN adduser ${POSTFIX_USERNAME} --disabled-password --no-create-home  --shell /bin/nologin
 
 # who made this version
 LABEL maintainer=dansta
