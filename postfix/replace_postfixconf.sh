@@ -7,6 +7,7 @@ CONFDATA="$(cat $CONF)"
 KEYAWK="/usr/bin/awk -f /usr/local/bin/key.awk"
 VALUEAWK="/usr/bin/awk -f /usr/local/bin/value.awk"
 
+
 # get all the POSTFIXvars
 POSTFIXENV="$(env | grep POSTFIX)"
 # for each POSTFIXvar, replace them in the file
