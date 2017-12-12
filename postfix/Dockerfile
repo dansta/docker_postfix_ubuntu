@@ -5,11 +5,11 @@ FROM ubuntu:latest
 
 # set env. replace right most column with values specific to your environment
 ENV POSTFIX_LISTEN "0.0.0.0"
-ENV POSTFIX_LISTEN6 '::/0'
+ENV POSTFIX_LISTEN6 '::\/0'
 ENV POSTFIX_HOSTNAME "MAIL"
 ENV POSTFIX_DOMAIN "EXAMPLE.COM"
 # this is "mynetworks" in the postfix config
-ENV POSTFIX_LOCAL_ADDRESSES "10.0.0.0/24"
+ENV POSTFIX_LOCAL_ADDRESSES "10.0.0.0\/24"
 # we relay to here
 ENV POSTFIX_RELAY_HOST "ANOTHEREMAILSERVER"
 ENV POSTFIX_ADMINISTRATOR "postmaster@${POSTFIX_DOMAIN}"
