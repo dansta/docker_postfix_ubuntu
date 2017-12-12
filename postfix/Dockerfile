@@ -23,7 +23,9 @@ ENV POSTFIX_VERSION "latest"
 ENV POSTFIX_SPOOL_DIRECTORY "/var/spool/postfix"
 
 # create low privilege user
-RUN adduser ${POSTFIX_USERNAME} --disabled-password --no-create-home
+# since it is based on ubuntu we will kill our user due to regular releases
+# forcing the admin to update this docker image disallowing usage of ancient software.
+RUN adduser ${POSTFIX_USERNAME} --disabled-password --no-create-home --user-group --f 60
 
 # who made this version
 LABEL maintainer=dansta
