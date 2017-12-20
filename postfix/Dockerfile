@@ -45,7 +45,7 @@ RUN apt-get install -y python3
 # Add our own config file
 ADD files/etc/postfix/main.cf /etc/postfix/main.cf
 # Replace params
-ADD replace_conf.py /usr/local/bin/replace_conf
+ADD replace.py /usr/local/bin/replace_conf
 RUN chmod u+x /usr/local/bin/replace_conf
 RUN /usr/local/bin/replace_conf
 
