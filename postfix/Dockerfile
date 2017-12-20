@@ -47,7 +47,7 @@ ADD files/etc/postfix/main.cf /etc/postfix/main.cf
 # Replace params
 ADD replace.py /usr/local/bin/replace_conf
 RUN chmod u+x /usr/local/bin/replace_conf
-RUN /usr/local/bin/replace_conf
+RUN /usr/local/bin/replace_conf /etc/postfix/main.cf POSTFIX
 
 # Remove python3 again
 RUN apt-get remove -y python3
