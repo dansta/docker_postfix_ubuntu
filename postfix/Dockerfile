@@ -4,25 +4,40 @@ FROM ubuntu:latest
 # Postfix 
 
 # Set env. replace right most column with values specific to your environment
-ENV POSTFIX_SMTP_PORT '25'
-ENV POSTFIX_TLS_PORT '589'
-ENV POSTFIX_LISTEN '0.0.0.0'
-ENV POSTFIX_LISTEN6 '::'
-ENV POSTFIX_HOSTNAME 'mail'
-ENV POSTFIX_DOMAIN 'example.com'
+ARG POSTFIX_SETGID 
+ENV POSTFIX_SETGID ${POSTFIX_SETGID:-somegroup}
+ARG POSTFIX_SMTP_PORT
+ENV POSTFIX_SMTP_PORT ${POSTFIX_SMTP_PORT:-25}
+ARG POSTFIX_TLS_PORT
+ENV POSTFIX_TLS_PORT ${POSTFIX_TLS_PORT:-589}
+ARG POSTFIX_LISTEN
+ENV POSTFIX_LISTEN ${POSTFIX_LISTEN:-0.0.0.0}
+ARG POSTFIX_LISTEN6
+ENV POSTFIX_LISTEN6 ${POSTFIX_LISTEN6:-::}
+ARG POSTFIX_HOSTNAME
+ENV POSTFIX_HOSTNAME ${POSTFIX_HOSTNAME:-mail}
+ARG POSTFIX_DOMAIN
+ENV POSTFIX_DOMAIN ${POSTFIX_DOMAIN:-example.com}
 # This is "mynetworks" in the postfix config
-ENV POSTFIX_LOCAL_ADDRESSES '10.0.0.0/24'
+ARG POSTFIX_LOCAL_ADDRESSES
+ENV POSTFIX_LOCAL_ADDRESSES ${POSTFIX_LOCAL_ADDRESSES:-10.0.0.0/24}
 # We relay to here
-ENV POSTFIX_RELAY_HOST 'nangiala.localdomain'
-ENV POSTFIX_ADMINISTRATOR "postmaster@${POSTFIX_DOMAIN}"
+ARG POSTFIX_RELAY_HOST
+ENV POSTFIX_RELAY_HOST ${POSTFIX_RELAY_HOST:-nangiala.localdomain}
+ARG POSTFIX_ADMINISTRATOR
+ENV POSTFIX_ADMINISTRATOR ${POSTFIX_ADMINISTRATOR:-postmaster@${POSTFIX_DOMAIN}}
 # Identify the server to any client/other server
-ENV POSTFIX_BANNERNAME 'dansta/docker_postfix_ubuntu'
+ARG POSTFIX_BANNERNAME
+ENV POSTFIX_BANNERNAME ${POSTFIX_BANNERNAME:-dansta/docker_postfix_ubuntu}
 # Postfix runs as this user
-ENV POSTFIX_USERNAME 'hamburger'
+ARG POSTFIX_USERNAME
+ENV POSTFIX_USERNAME ${POSTFIX_USERNAME:-hamburger}
 # This version will be reported to clients/other servers
-ENV POSTFIX_VERSION 'latest'
+ARG POSTFIX_VERSION
+ENV POSTFIX_VERSION ${POSTFIX_VERSION:-latest}
 # Where do we store mail?
-ENV POSTFIX_SPOOL_DIRECTORY '/var/spool/postfix'
+ARG POSTFIX_SPOOL_DIRECTORY
+ENV POSTFIX_SPOOL_DIRECTORY ${POSTFIX_SPOOL_DIRECTORY:-/var/spool/postfix}
 
 # Create low privilege user
 RUN adduser ${POSTFIX_USERNAME} --disabled-password --no-create-home  --shell /bin/nologin
@@ -61,3 +76,6 @@ RUN service rsyslog start
 # Test nginx for build, run in foreground
 STOPSIGNAL SIGTERM
 CMD ['postfix']
+
+# Start
+ENTRYPOINT ['postfix']
