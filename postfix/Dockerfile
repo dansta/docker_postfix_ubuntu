@@ -51,7 +51,6 @@ LABEL maintainer=dansta
 
 # Update and install packages
 RUN apt-get update
-RUN apt-get install -y rsyslog
 RUN apt-get install -y postfix
 RUN apt-get install -y spamass-milter
 RUN apt-get install -y postgrey
@@ -69,9 +68,6 @@ RUN apt-get remove -y python3
 
 # Document port usage for docker in case you are going to use it as a service
 EXPOSE "${POSTFIX_SMTP_PORT}/tcp"
-
-# Remote logging made possible
-RUN service rsyslog start
 
 # Test nginx for build, run in foreground
 STOPSIGNAL SIGTERM
