@@ -47,14 +47,13 @@ LABEL maintainer=dansta
 
 # check ourselves to know we are alive, i need to think of something smart here.
 # telnet will not cut it
-#HEALTHCHECK --interval=15s --timeout=3s CMD telnet localhost 25 || exit 1
+HEALTHCHECK --interval=15s --timeout=3s CMD postfix status || exit 1
 
 # Update and install packages
-RUN apt-get update
-RUN apt-get install -y postfix
-RUN apt-get install -y spamass-milter
-RUN apt-get install -y postgrey
-RUN apt-get install -y python3
+RUN apt-get update && apt-get install -y postfix \
+                                         spamass-milter \
+                                         postgrey \
+                                         python3
 
 # Add our own config file
 ADD files/etc/postfix/main.cf /etc/postfix/main.cf
