@@ -66,7 +66,13 @@ RUN /usr/local/bin/replace_conf /etc/postfix/main.cf POSTFIX
 RUN apt-get remove -y python3
 
 # Document port usage for docker in case you are going to use it as a service
-EXPOSE "${POSTFIX_SMTP_PORT}/tcp"
+EXPOSE "${POSTFIX_SMTP_PORT}/tcp" \
+       "${POSTFIX_TLS_PORT}/tcp"
+
+VOLUME /var/spool/ \
+       /var/log/postfix \
+       /dynamic/ \
+       /home/
 
 # Test nginx for build, run in foreground
 STOPSIGNAL SIGTERM

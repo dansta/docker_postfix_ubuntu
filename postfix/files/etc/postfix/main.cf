@@ -20,7 +20,7 @@ message_size_limit = 2048000
 mynetworks = 127.0.0.1/32, POSTFIX_LOCAL_ADDRESSES
 
 # relayhost = POSTFIX_RELAY_HOST
-
+home_mailbox = Maildir/
 smtp_tls_security_level = encrypt
 smtp_tls_mandatory_ciphers = high
 require_home_directory = no
