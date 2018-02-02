@@ -49,6 +49,14 @@ LABEL maintainer=dansta
 # telnet will not cut it
 HEALTHCHECK --interval=15s --timeout=3s CMD postfix status || exit 1
 
+# Prepare debconf since postfix normally is interactive install
+ADD replace.py /usr/local/bin/replace_conf
+ADD debconf.sh /usr/local/bin/debconf.sh
+RUN chmod u+x /usr/local/bin/replace_conf \
+              /usr/local/bin/debconf.sh
+RUN chmod u+x /usr/local/bin/debconf.sh
+RUN /usr/local/bin/replace_conf /usr/local/bin/debconf.sh POSTFIX
+
 # Update and install packages
 RUN apt-get update && apt-get install -y postfix \
                                          spamass-milter \
@@ -58,8 +66,6 @@ RUN apt-get update && apt-get install -y postfix \
 # Add our own config file
 ADD files/etc/postfix/main.cf /etc/postfix/main.cf
 # Replace params
-ADD replace.py /usr/local/bin/replace_conf
-RUN chmod u+x /usr/local/bin/replace_conf
 RUN /usr/local/bin/replace_conf /etc/postfix/main.cf POSTFIX
 
 # Remove python3 again
