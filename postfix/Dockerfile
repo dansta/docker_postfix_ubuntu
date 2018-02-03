@@ -62,6 +62,7 @@ RUN chmod u+x /usr/local/bin/replace_conf \
               /usr/local/bin/debconf.sh
 RUN chmod u+x /usr/local/bin/debconf.sh
 RUN /usr/local/bin/replace_conf /usr/local/bin/debconf.sh POSTFIX
+RUN /usr/local/bin/debconf.sh
 
 # Update and install packages
 RUN apt-get install -y postfix \
