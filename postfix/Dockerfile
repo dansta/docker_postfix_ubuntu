@@ -5,7 +5,7 @@ FROM ubuntu:latest
 
 # Set env. replace right most column with values specific to your environment
 ARG POSTFIX_SETGID 
-ENV POSTFIX_SETGID ${POSTFIX_SETGID:-somegroup}
+ENV POSTFIX_SETGID ${POSTFIX_SETGID:-postfix}
 ARG POSTFIX_SMTP_PORT
 ENV POSTFIX_SMTP_PORT ${POSTFIX_SMTP_PORT:-25}
 ARG POSTFIX_TLS_PORT
