@@ -30,5 +30,5 @@ docker service create \
             --mount source=dynamic,target=/dynamic/ \
             --mount source=home,target=/home/ \
             --name "postfix" \
-            --publish published=993,target=993,protocol=tcp \
+            --publish published=25,target=25,protocol=tcp \
             postfix:0.0.1
