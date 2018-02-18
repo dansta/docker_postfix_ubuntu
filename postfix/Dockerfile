@@ -89,6 +89,3 @@ VOLUME /var/spool/ \
 # Test nginx for build, run in foreground
 STOPSIGNAL SIGTERM
 CMD ['postfix']
-
-# Start
-ENTRYPOINT ['postfix']
