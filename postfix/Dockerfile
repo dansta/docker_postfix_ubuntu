@@ -90,6 +90,10 @@ VOLUME /var/spool/ \
        /home/
 
 STOPSIGNAL SIGTERM
+<<<<<<< HEAD
 
 # Start postfix
 CMD /usr/local/bin/wrapper.sh
+=======
+CMD ['postfix']
+>>>>>>> e19b69308c5f09b7b8eed5b5ba5dc0997df7600d
