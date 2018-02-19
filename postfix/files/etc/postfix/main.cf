@@ -4,7 +4,6 @@ mail_version = POSTFIX_VERSION
 mail_spool_directory = POSTFIX_SPOOL_DIRECTORY
 helpful_warnings = yes
 html_directory = /dev/null
-setgid_group = POSTFIX_SETGID
 myhostname = POSTFIX_HOSTNAME
 mydomain = POSTFIX_DOMAIN
 myorigin = POSTFIX_HOSTNAME
@@ -13,7 +12,7 @@ inet_protocols = all
 smtpd_banner = POSTFIX_HOSTNAME ESMTP
 unknown_local_recipient_reject_code = 550
 alias_maps = hash:/etc/aliases
-alias_database hash:/etc/aliases
+alias_database = hash:/etc/aliases
 local_destination_concurrency_limit = 3
 default_destination_concurrency_limit = 5
 message_size_limit = 2048000
@@ -37,10 +36,9 @@ smtpd_tls_loglevel = 1
 smtpd_tls_received_header = no
 smtpd_tls_auth_only = no
 
-smtp_tls_security_level = may
 smtpd_tls_security_level = may
 
-smtp_tls_eecdh_grade = strong
+#smtp_tls_eecdh_grade = strong
 smtpd_tls_eecdh_grade = strong
 smtp_tls_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5
 smtpd_tls_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5
