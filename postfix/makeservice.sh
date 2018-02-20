@@ -15,8 +15,8 @@ docker service create \
             --mode global \
             --update-delay 60s \
             --update-parallelism 1 \
-            --dns 79.99.4.100 \
-            --dns 79.99.4.101 \
+            --dns 8.8.8.8 \
+            --dns 9.9.9.9 \
             --mount source=postfix,target=/var/log/postfix \
             --mount source=postfix,target=/var/spool/ \
             --mount source=dynamic,target=/dynamic/ \
