@@ -45,9 +45,8 @@ ENV POSTFIX_SPOOL_DIRECTORY ${POSTFIX_SPOOL_DIRECTORY:-/var/spool/postfix/}
 # Who made this version
 LABEL maintainer=dansta
 
-# check ourselves to know we are alive, i need to think of something smart here.
-# telnet will not cut it
-#HEALTHCHECK --interval=15s --timeout=3s CMD postfix status || exit 1
+# This ought to work but might not 
+HEALTHCHECK --interval=15s --timeout=3s CMD postfix status || exit 1
 
 # Install config replacement env
 RUN apt-get update && apt-get install -y python3
@@ -87,7 +86,8 @@ EXPOSE "${POSTFIX_SMTP_PORT}/tcp" \
 VOLUME /var/spool/ \
        /var/log/postfix \
        /dynamic/ \
-       /home/
+       /home/ \
+       /certificates/
 
 STOPSIGNAL SIGTERM
 

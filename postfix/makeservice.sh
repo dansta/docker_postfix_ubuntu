@@ -9,6 +9,7 @@ docker build -t postfix:0.0.1 .
 docker volume create dynamic
 docker volume create postfix
 docker volume create home
+docker volume create certificates
 
 # Create service
 docker service create \
@@ -21,6 +22,7 @@ docker service create \
             --mount source=postfix,target=/var/spool/ \
             --mount source=dynamic,target=/dynamic/ \
             --mount source=home,target=/home/ \
+            --mount source=certificates,target=/certificates/ \
             --name "postfix" \
             --publish published=25,target=25,protocol=tcp \
             postfix:0.0.1

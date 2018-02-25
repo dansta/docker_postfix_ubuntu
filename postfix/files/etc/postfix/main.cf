@@ -20,15 +20,15 @@ mynetworks = 127.0.0.1/32, POSTFIX_LOCAL_ADDRESSES
 
 # relayhost = POSTFIX_RELAY_HOST
 home_mailbox = Maildir/
-smtp_tls_security_level = encrypt
+smtp_tls_security_level = may
 smtp_tls_mandatory_ciphers = high
 require_home_directory = no
 2bounce_notice_recipient = POSTFIX_ADMINISTRATOR
 error_notice_recipient = POSTFIX_ADMINISTRATOR
 notify_classes = bounce, resource, software, 
 
-smtpd_tls_cert_file = /etc/postfix/postfix.crt
-smtpd_tls_key_file = /etc/postfix/postfix.key
+smtpd_tls_cert_file = /etc/postfix/cert.pem
+smtpd_tls_key_file = /certificates/key.pem
 smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
 smtpd_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
 smtp_tls_loglevel = 1
